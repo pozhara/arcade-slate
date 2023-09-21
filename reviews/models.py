@@ -57,7 +57,7 @@ class Review(models.Model):
     developed_by = models.CharField(max_length=255)
     level_of_difficulty = models.CharField(max_length=50, choices=DIFFICULTY)
     suitable_age = models.CharField(max_length=15, choices=AGE)
-    hours_spent = models.IntegerField(max_length=300, blank=True)
+    hours_spent = models.IntegerField(blank=True)
     image = models.ImageField(
         upload_to='images/', default='../default_post_g1aaa6.jpg', blank=True
     )

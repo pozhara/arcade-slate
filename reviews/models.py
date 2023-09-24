@@ -59,7 +59,7 @@ class Review(models.Model):
     suitable_age = models.CharField(max_length=15, choices=AGE)
     hours_spent = models.IntegerField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../default_post_g1aaa6.jpg', blank=True
+        upload_to='images/', blank=True
     )
 
     class Meta:

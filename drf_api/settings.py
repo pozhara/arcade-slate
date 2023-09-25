@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'profiles',
     'reviews',
-    'best_deals'
+    'best_deals',
+    'comments'
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import BestDeals
+from likes.models import DealLike
 
 
 class BestDealsSerializer(serializers.ModelSerializer):
@@ -7,6 +8,9 @@ class BestDealsSerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
+    deals_like_id = serializers.SerializerMethodField()
+    deals_likes_count = serializers.ReadOnlyField()
+    deals_comments_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -27,10 +31,20 @@ class BestDealsSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
+    def get_deals_like_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            like = DealLike.objects.filter(
+                owner=user, deal=obj
+            ).first()
+            return like.id if like else None
+        return None
+
     class Meta:
         model = BestDeals
         fields = [
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
-            'title', 'content', 'category', 'image'
+            'title', 'content', 'category', 'image', 'deals_like_id',
+            'deals_likes_count', 'deals_comments_count'
         ]

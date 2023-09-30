@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import ReviewComment, DealsComment
 from .serializers import (
@@ -16,6 +17,12 @@ class ReviewCommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = ReviewComment.objects.all()
+    filter_backends = [
+        DjangoFilterBackend
+    ]
+    filterset_fields = [
+        'review'
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -37,6 +44,12 @@ class DealsCommentList(generics.ListCreateAPIView):
     serializer_class = DealCommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = DealsComment.objects.all()
+    filter_backends = [
+        DjangoFilterBackend
+    ]
+    filterset_fields = [
+        'deal'
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

@@ -1,5 +1,6 @@
 from dj_rest_auth.serializers import UserDetailsSerializer
 from rest_framework import serializers
+from django.contrib.auth.models import User
 
 
 class CurrentUserSerializer(UserDetailsSerializer):
@@ -7,6 +8,7 @@ class CurrentUserSerializer(UserDetailsSerializer):
     profile_image = serializers.ReadOnlyField(source='profile.image.url')
 
     class Meta:
+        model = User
         fields = UserDetailsSerializer.Meta.fields + (
             'profile_id', 'profile_image'
         )

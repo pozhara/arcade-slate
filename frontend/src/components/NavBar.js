@@ -80,11 +80,10 @@ const NavBar = () => {
     >
       <Container>
         <NavLink to="/">
-          <Navbar.Brand>
+          <Navbar.Brand className='text-white'>
             arcade slate
           </Navbar.Brand>
         </NavLink>
-        {currentUser}
         <Navbar.Toggle
           ref={ref}
           onClick={() => setExpanded(!expanded)}

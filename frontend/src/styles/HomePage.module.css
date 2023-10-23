@@ -1,0 +1,32 @@
+.YellowText{
+    color:#fcdc60;
+}
+
+.PurpleText{
+    color:purple;
+}
+
+.YellowBackground {
+    background-color: #fcdc60;
+}
+
+.DarkPurpleBackground {
+    background-color: rgb(111, 8, 111);
+}
+
+.HeroContainer {
+    background-color: #fbe3d7;
+}
+
+.CallButton:hover{
+    background-color:orange;
+}
+
+.HeroImage {
+    background-image: url('../assets/room2.jpg');
+    height: 400px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}

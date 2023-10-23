@@ -5,6 +5,9 @@ import { Route, Switch } from "react-router-dom";
 import "./api/axiosDefaults";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignInForm from "./pages/auth/SignInForm";
+import ReviewCreateForm from "./pages/reviews/ReviewCreateForm";
+import HomePage from "./pages/HomePage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -12,12 +15,14 @@ function App() {
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          <Route exact path="/" render={() => <h1>Home page</h1>} />
+          <Route exact path="/" render={() => <HomePage/>} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
+          <Route exact path='/reviews' render={() => <ReviewCreateForm/>} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
+      <Footer/>
     </div>
   );
 }

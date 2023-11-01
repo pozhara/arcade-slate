@@ -99,7 +99,7 @@ const HomeAbout = () => {
                 <div
                   className={`feature bg-gradient rounded-3 mb-4 mt-n4 ${styles.YellowBackground}`}
                 >
-                  <i class={`fa-solid fa-comment ${styles.PurpleText}`}></i>
+                  <i className={`fa-solid fa-comment ${styles.PurpleText}`}></i>
                 </div>
                 <h2 className="fs-4 fw-bold text-white">Leave your comments</h2>
                 <p className="mb-0 text-white">

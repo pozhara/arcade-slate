@@ -12,7 +12,7 @@ import styles from "../../styles/PostCreateEditForm.module.css";
 import appStyles from "../../App.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import Asset from "../../components/Asset";
-import { Image } from "react-bootstrap";
+import { Alert, Image } from "react-bootstrap";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 
@@ -100,6 +100,11 @@ function ReviewCreateForm() {
             />
           </label>
         </div>
+        {errors?.title?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
         <div>
           <label>
             <span>Content:</span>
@@ -111,6 +116,11 @@ function ReviewCreateForm() {
             />
           </label>
         </div>
+        {errors?.content?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
         <div>
           <label>
             <span>Stars:</span>
@@ -133,6 +143,11 @@ function ReviewCreateForm() {
             </select>
           </label>
         </div>
+        {errors?.stars?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
         <div>
           <label>
             <span>Genre:</span>
@@ -159,6 +174,11 @@ function ReviewCreateForm() {
             </select>
           </label>
         </div>
+        {errors?.genre?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
         <div>
           <label>
             <span>Developed by:</span>
@@ -170,6 +190,11 @@ function ReviewCreateForm() {
             />
           </label>
         </div>
+        {errors?.developed_by?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
         <div>
           <label>
             <span>Difficulty:</span>
@@ -188,6 +213,11 @@ function ReviewCreateForm() {
             </select>
           </label>
         </div>
+        {errors?.level_of_difficulty?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
         <div>
           <label>
             <span>Suitable age:</span>
@@ -206,6 +236,11 @@ function ReviewCreateForm() {
             </select>
           </label>
         </div>
+        {errors?.suitable_age?.map((message, idx) => (
+          <Alert variant="warning" key={idx}>
+            {message}
+          </Alert>
+        ))}
         <div>
           <label>Hours spent:</label>
           <input
@@ -218,6 +253,11 @@ function ReviewCreateForm() {
           />
         </div>
       </div>
+      {errors?.hours_spent?.map((message, idx) => (
+        <Alert variant="warning" key={idx}>
+          {message}
+        </Alert>
+      ))}
 
       <Button
         className={`${btnStyles.Button} ${btnStyles.Bright}`}
@@ -276,6 +316,11 @@ function ReviewCreateForm() {
                 ref={imageInput}
               />
             </Form.Group>
+            {errors?.image?.map((message, idx) => (
+              <Alert variant="warning" key={idx}>
+                {message}
+              </Alert>
+            ))}
             <div className="d-md-none">{textFields}</div>
           </Container>
         </Col>

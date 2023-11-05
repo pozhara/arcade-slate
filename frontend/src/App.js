@@ -9,22 +9,52 @@ import ReviewCreateForm from "./pages/reviews/ReviewCreateForm";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import ReviewPage from "./pages/reviews/ReviewPage";
+import { useCurrentUser } from "./contexts/CurrentUserContext";
+import ReviewsPage from "./pages/reviews/ReviewsPage";
 
 function App() {
+  const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
   return (
     <div className={styles.App}>
       <NavBar />
       <Container className={styles.Main}>
         <Switch>
-          <Route exact path="/" render={() => <HomePage/>} />
+          <Route exact path="/" render={() => <HomePage />} />
+          <Route
+            exact
+            path="/reviews"
+            render={() => (
+              <ReviewsPage message="No results found. Adjust the search keyword." />
+            )}
+          />
+          <Route
+            exact
+            path="/feed"
+            render={() => (
+              <ReviewsPage
+                message="No results found. Adjust the search keyword or follow a user."
+                filter={`owner__followed__owner__profile=${profile_id}&`}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/liked"
+            render={() => (
+              <ReviewsPage
+                message="No results found. Adjust the search keyword or like a post."
+                filter={`review_likes__owner__profile=${profile_id}&ordering=-review_likes__created_at&`}
+              />
+            )}
+          />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path='/reviews' render={() => <ReviewCreateForm/>} />
-          <Route exact path='/reviews/:id' render={() => <ReviewPage/>} />
+          <Route exact path="/reviews/:id" render={() => <ReviewPage />} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

@@ -3,9 +3,10 @@ import styles from "../../styles/Post.module.css";
 import homeStyles from '../../styles/HomePage.module.css'
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
+import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Review = ({ review }) => {
 
@@ -33,6 +34,20 @@ const Review = ({ review }) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === review.owner;
+  const history = useHistory()
+
+  const handleEdit = () => {
+    history.push(`/reviews/${id}/edit`);
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axiosRes.delete(`/reviews/${id}/`);
+      history.goBack();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleLike = async () => {
     try {
@@ -89,7 +104,7 @@ const Review = ({ review }) => {
           </div>
           <div className="d-flex align-items-center">
             <span className={styles.PostDate}>{updated_at}</span>
-            {is_owner && reviewPage && "..."}
+            {is_owner && <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete}/>}
           </div>
         </Media>
       </Card.Body>

@@ -55,3 +55,15 @@ class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
         review_likes_count=Count('review_likes', distinct=True),
         review_comments_count=Count('reviewcomment', distinct=True)
     ).order_by('-created_at')
+
+
+class LikedReviews(generics.ListAPIView):
+    serializer_class = ReviewSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Review.objects.filter(review_likes__owner=user).annotate(
+            review_likes_count=Count('review_likes', distinct=True),
+            review_comments_count=Count('reviewcomment', distinct=True)
+        ).order_by('-created_at')

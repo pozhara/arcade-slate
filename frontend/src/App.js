@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import ReviewPage from "./pages/reviews/ReviewPage";
 import { useCurrentUser } from "./contexts/CurrentUserContext";
 import ReviewsPage from "./pages/reviews/ReviewsPage";
+import LikedReviews from "./pages/reviews/LikedReviews";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -21,36 +22,13 @@ function App() {
       <Container className={styles.Main}>
         <Switch>
           <Route exact path="/" render={() => <HomePage />} />
-          <Route
-            exact
-            path="/reviews"
-            render={() => (
-              <ReviewsPage message="No results found. Adjust the search keyword." />
-            )}
-          />
-          <Route
-            exact
-            path="/feed"
-            render={() => (
-              <ReviewsPage
-                message="No results found. Adjust the search keyword or follow a user."
-                filter={`owner__followed__owner__profile=${profile_id}&`}
-              />
-            )}
-          />
-          <Route
-            exact
-            path="/liked"
-            render={() => (
-              <ReviewsPage
-                message="No results found. Adjust the search keyword or like a post."
-                filter={`review_likes__owner__profile=${profile_id}&ordering=-review_likes__created_at&`}
-              />
-            )}
-          />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/reviews/:id" render={() => <ReviewPage />} />
+          <Route exact path="/reviews/create" render={() => <ReviewCreateForm />} />
+          <Route exact path="/reviews" render={() => <ReviewsPage/>} />
+          <Route exact path="/reviews/all" render={() => <ReviewsPage/>} />
+          <Route exact path="/liked" render={() => <LikedReviews/>} />
+          <Route exact path="/reviews/:id" render={() => <ReviewPage/>} />
           <Route render={() => <p>Page not found!</p>} />
         </Switch>
       </Container>

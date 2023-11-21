@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "../../styles/Post.module.css";
-import homeStyles from "../../styles/HomePage.module.css";
-import navStyles from "../../styles/NavBar.module.css";
+import homeStyles from '../../styles/HomePage.module.css'
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -9,8 +8,9 @@ import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 
 const Review = ({ review }) => {
+
   const {
-    id,
+    id = 0,
     owner,
     profile_id,
     profile_image,
@@ -30,8 +30,9 @@ const Review = ({ review }) => {
     reviewPage,
     setReviews,
   } = review;
+
   const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === owner;
+  const is_owner = currentUser?.username === review.owner;
 
   const handleLike = async () => {
     try {
@@ -49,13 +50,13 @@ const Review = ({ review }) => {
         }),
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
   const handleUnlike = async () => {
     try {
-      await axiosRes.delete(`/reviewlikes/${review_like_id}`, { review: id });
+      await axiosRes.delete(`/reviewlikes/${review_like_id}/`);
       setReviews((prevReviews) => ({
         ...prevReviews,
         results: prevReviews.results.map((review) => {
@@ -69,7 +70,7 @@ const Review = ({ review }) => {
         }),
       }));
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -77,80 +78,108 @@ const Review = ({ review }) => {
     <Card className={styles.Post}>
       <Card.Body>
         <Media className="align-items-center justify-content-between">
-          <Link to={`/profiles/${profile_id}`} className={navStyles.NavLink}>
+          <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_image} height={55} />
-            {owner}
+            {/* <span className={styles.Username}>{owner}</span> */}
           </Link>
+          <div className="align-items-center justify-content-between">
+            {title && (
+              <Card.Title className={styles.PostTitle}>{title}</Card.Title>
+            )}
+          </div>
           <div className="d-flex align-items-center">
-            <span className="text-white">{updated_at}</span>
+            <span className={styles.PostDate}>{updated_at}</span>
             {is_owner && reviewPage && "..."}
           </div>
         </Media>
       </Card.Body>
-      <Link to={`/reviews/${id}`}>
-        <Card.Img src={image} alt={title} />
-      </Link>
+
       <Card.Body>
-        {title && (
-          <Card.Title className="text-center text-white">{title}</Card.Title>
-        )}
-        {content && <Card.Text className="text-white">{content}</Card.Text>}
-        {stars && (
-          <Card.Text className="text-white">
-            Stars: {stars}
-            <i className={`fa-solid fa-star ${homeStyles.YellowText}`}></i>
-          </Card.Text>
-        )}
-        {genre && <Card.Text className="text-white">Genre: {genre}</Card.Text>}
-        {developed_by && (
-          <Card.Text className="text-white">
-            Developed by: {developed_by}
-          </Card.Text>
-        )}
-        {level_of_difficulty && (
-          <Card.Text className="text-white">
-            Difficulty level: {level_of_difficulty}
-          </Card.Text>
-        )}
-        {suitable_age && (
-          <Card.Text className="text-white">
-            Suitable age: {suitable_age}
-          </Card.Text>
-        )}
-        {hours_spent && (
-          <Card.Text className="text-white">
-            Hours spent: {hours_spent}
-          </Card.Text>
-        )}
-        <div className={styles.PostBar}>
-          {is_owner ? (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>You can't like your own post!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
-          ) : review_like_id ? (
-            <span onClick={handleUnlike}>
-              <i className={`fas fa-heart ${styles.Heart}`} />
-            </span>
-          ) : currentUser ? (
-            <span onClick={handleLike}>
-              <i className={`far fa-heart ${styles.HeartOutline}`} />
-            </span>
-          ) : (
-            <OverlayTrigger
-              placement="top"
-              overlay={<Tooltip>Log in to like posts!</Tooltip>}
-            >
-              <i className="far fa-heart" />
-            </OverlayTrigger>
+        <div className={styles.PostContainer}>
+          {image && (
+            <div className={styles.ImageContainer}>
+              <Link to={`/reviews/${id}`}>
+                <Card.Img
+                  src={image}
+                  alt={title}
+                  className={styles.PostImage}
+                />
+              </Link>
+            </div>
           )}
-          {review_likes_count}
-          <Link to={`reviews/${id}`}>
-            <i className="far fa-comments" />
-          </Link>
-          {review_comments_count}
+          <div className={styles.ContentContainer}>
+            {content && (
+              <Card.Text className={styles.PostContent}>
+                {"~ "}
+                {content}
+              </Card.Text>
+            )}
+            {stars && (
+              <Card.Text className={styles.PostContent}>
+                Stars: {stars}<i className={`fa-solid fa-star small ${homeStyles.YellowText}`}></i>
+              </Card.Text>
+            )}
+            {genre && (
+              <Card.Text className={styles.PostContent}>
+                Genre: {genre}
+              </Card.Text>
+            )}
+            {developed_by && (
+              <Card.Text className={styles.PostContent}>
+                Developed by: {developed_by}
+              </Card.Text>
+            )}
+            {level_of_difficulty && (
+              <Card.Text className={styles.PostContent}>
+                Difficulty level: {level_of_difficulty}
+              </Card.Text>
+            )}
+            {suitable_age && (
+              <Card.Text className={styles.PostContent}>
+                Suitable age: {suitable_age}
+              </Card.Text>
+            )}
+            {hours_spent && (
+              <Card.Text className={styles.PostContent}>
+                Hours spent: {hours_spent}
+              </Card.Text>
+            )}
+          </div>
+        </div>
+        <div>
+          <div>
+            {is_owner ? (
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>You can't like your own post!</Tooltip>}
+              >
+                <i className="far fa-heart" />
+              </OverlayTrigger>
+            ) : review_like_id ? (
+              <span onClick={handleUnlike}>
+                <i className={`fas fa-heart ${styles.Heart}`} />
+              </span>
+            ) : currentUser ? (
+              <span onClick={handleLike}>
+                <i className={`far fa-heart ${styles.HeartOutline}`} />
+              </span>
+            ) : (
+              <OverlayTrigger
+                placement="top"
+                overlay={<Tooltip>Log in to like posts!</Tooltip>}
+              >
+                <i className="far fa-heart" />
+              </OverlayTrigger>
+            )}
+            <span className={styles.LikeCount}>{review_likes_count}</span>
+          </div>
+
+          <div>
+            <Link to={`reviews/${id}`} className={styles.CommentIcon}>
+              <i className="far fa-comments" />
+            </Link>
+            <span className={styles.CommentCount}>{review_comments_count}</span>
+          </div>
         </div>
       </Card.Body>
     </Card>

@@ -2,25 +2,23 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import Asset from "../../components/Asset";
-import appStyles from "../../App.module.css";
-import styles from "../../styles/PostsPage.module.css";
 import Container from "react-bootstrap/Container";
+import appStyles from "../../App.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import Review from "./Review";
-import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
 import NoResults from "../../assets/no-results.png";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 
-const Reviews = ({message=''}) => {
+const LikedReviews = (message) => {
   const [reviews, setReviews] = useState({ results: [] });
+  const [query, setQuery] = useState("");
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-  const currentUser = useCurrentUser()
-
-  const [query, setQuery] = useState("");
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -44,13 +42,13 @@ const Reviews = ({message=''}) => {
   }, [query, pathname, currentUser]);
 
   return (
-    <Container>
+    <Container fluid>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
           <p>popular profiles</p>
-          <i className={`fas fa-search ${styles.SearchIcon}`} />
+          <i className={`fas fa-search ${appStyles.SearchIcon}`} />
           <Form
-            className={styles.SearchBar}
+            className={appStyles.SearchBar}
             onSubmit={(event) => event.preventDefault()}
           >
             <Form.Control
@@ -58,7 +56,7 @@ const Reviews = ({message=''}) => {
               onChange={(event) => setQuery(event.target.value)}
               type="text"
               className="mr-sm-2"
-              placeholder="Search posts"
+              placeholder="Search reviews"
             />
           </Form>
 
@@ -67,12 +65,7 @@ const Reviews = ({message=''}) => {
               {reviews.results.length ? (
                 <InfiniteScroll
                   children={reviews.results.map((review) => (
-                    <Review
-                      key={review.id}
-                      review={review}
-                      setReviews={setReviews}
-                      reviewPage
-                    />
+                    <Review key={review.id} review={review} setReviews={setReviews} reviewPage />
                   ))}
                   dataLength={reviews.results.length}
                   loader={<Asset spinner />}
@@ -99,4 +92,4 @@ const Reviews = ({message=''}) => {
   );
 };
 
-export default Reviews;
+export default LikedReviews;

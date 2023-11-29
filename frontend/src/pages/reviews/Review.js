@@ -28,7 +28,6 @@ const Review = ({ review }) => {
     suitable_age,
     hours_spent,
     updated_at,
-    reviewPage,
     setReviews,
   } = review;
 
@@ -65,7 +64,7 @@ const Review = ({ review }) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   };
 

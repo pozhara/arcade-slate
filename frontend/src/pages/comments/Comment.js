@@ -22,7 +22,6 @@ const Comment = (comment) => {
   const currentUser = useCurrentUser();
   const [showEditForm, setShowEditForm] = useState(false);
   const is_owner = currentUser?.username === comment.owner;
-  console.log(is_owner);
 
   const handleDelete = async () => {
     try {

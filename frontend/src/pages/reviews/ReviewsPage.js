@@ -13,6 +13,7 @@ import NoResults from "../../assets/no-results.png";
 import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 const Reviews = ({message=''}) => {
   const [reviews, setReviews] = useState({ results: [] });
@@ -47,7 +48,7 @@ const Reviews = ({message=''}) => {
     <Container>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <p>popular profiles</p>
+          <PopularProfiles mobile/>
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
             className={styles.SearchBar}
@@ -92,7 +93,7 @@ const Reviews = ({message=''}) => {
           )}
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <p>popular profiles</p>
+          <PopularProfiles/>
         </Col>
       </Row>
     </Container>

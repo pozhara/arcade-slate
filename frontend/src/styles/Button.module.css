@@ -52,6 +52,31 @@
     color:white;
 }
 
+.PurpleButton{
+    background-color:purple;
+    color:white;
+    font-size: 18px;
+    align-self: center;
+    border-radius: 100px;
+    border-color: transparent;
+    padding: 10px 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+    min-width: 75px;
+}
+
+.PurpleButton:hover{
+    opacity: 0.8;
+    border-color: transparent;
+    cursor: pointer;
+    background-color:rgb(201, 7, 201);
+    color:white;
+}
+
+.PurpleButton:focus{
+    background-color:rgb(201, 7, 201)
+}
+
 .YellowButton{
     background-color:#fcdc60;
     font-size: 18px;

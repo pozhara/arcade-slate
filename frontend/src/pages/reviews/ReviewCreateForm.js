@@ -89,7 +89,7 @@ function ReviewCreateForm() {
   };
 
   const textFields = (
-    <div className="text-center">
+    <div className='text-center'>
       <div>
         <div>
           <label>

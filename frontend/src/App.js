@@ -18,6 +18,10 @@ import UsernameForm from "./pages/profiles/UsernameForm";
 import UserPasswordForm from "./pages/profiles/UserPasswordForm";
 import ProfileEditForm from "./pages/profiles/ProfileEditForm";
 import ReviewsFeed from "./pages/reviews/ReviewsFeed";
+import DealCreateForm from "./pages/deals/DealCreateForm";
+import DealEditForm from "./pages/deals/DealEditForm";
+import DealPage from "./pages/deals/DealPage";
+import Deals from "./pages/deals/DealsPage";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -41,7 +45,11 @@ function App() {
           <Route exact path='/profiles/:id/edit/username' render={() => <UsernameForm/>}/>
           <Route exact path='/profiles/:id/edit/password' render={() => <UserPasswordForm/>}/>
           <Route exact path='/profiles/:id/edit' render={() => <ProfileEditForm/>}/>
-          <Route render={() => <p>Page not found!</p>} />
+          <Route exact path='/deals/create' render={() => <DealCreateForm/>}/>
+          <Route exact path='/deals' render={() => <Deals/>}/>
+          <Route exact path='/deals/:id' render={() =>  <DealPage/>}/>
+          <Route exact path="/deals/:id/edit" render={() => <DealEditForm/>}/>
+          <Route render={() => <p className='text-white'>Page not found!</p>} />
         </Switch>
       </Container>
       <Footer />

@@ -30,8 +30,6 @@ function ReviewPage() {
         ]);
         setReview(review);
         setComments(comments);
-        console.log(comments);
-        console.log(review);
       } catch (err) {
         console.log(err);
       }

@@ -84,7 +84,7 @@ const Review = ({ review }) => {
         }),
       }));
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   };
 

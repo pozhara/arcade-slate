@@ -8,7 +8,8 @@ import {
 } from "../contexts/CurrentUserContext";
 import axios from "axios";
 import styles from "../styles/NavBar.module.css";
-import footerStyles from "../styles/HomePage.module.css";
+import footerStyles from "../styles/Footer.module.css";
+import homeStyles from '../styles/HomePage.module.css';
 
 const Footer = () => {
   const currentUser = useCurrentUser();
@@ -50,7 +51,7 @@ const Footer = () => {
     </>
   );
   return (
-    <section className={`border-bottom text-center mb-0 ${footerStyles.DarkPurpleBackground}`}>
+    <section className={`border-bottom text-center mb-0 ${footerStyles.Footer} ${homeStyles.DarkPurpleBackground}`}>
       <nav>
         <NavLink className={styles.NavLink} exact activeClassName={styles.Active} to="/">
           <i className="fas fa-home"></i>Home

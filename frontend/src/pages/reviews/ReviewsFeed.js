@@ -27,7 +27,7 @@ const ReviewsFeed = ({message=''}) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { data } = await axiosReq.get(`/reviews/?filter=owner__followed__owner__profile=${profile_id}&search=${query}`);
+        const { data } = await axiosReq.get(`/reviews/?owner__followed__owner__profile=${profile_id}&search=${query}`);
         setReviews(data);
         setHasLoaded(true);
       } catch (err) {
@@ -83,7 +83,7 @@ const ReviewsFeed = ({message=''}) => {
                 />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message={message} />
+                  <Asset src={NoResults} message="No results found. Adjust the search keyword or follow a user." />
                 </Container>
               )}
             </>

@@ -17,7 +17,7 @@ import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
 import { Button } from "react-bootstrap";
 
-const Deals = ({ message = "" }) => {
+const Deals = () => {
   const [deals, setDeals] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
@@ -50,12 +50,16 @@ const Deals = ({ message = "" }) => {
     <Container>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <Link
-            className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}
-            to="/deals/create"
-          >
-            Post a deal
-          </Link>
+          <div className="text-center">
+            <Button className={`${btnStyles.PostBright} mb-2 mt-1`}>
+              <Link
+                to="/deals/create"
+                className={`text-black text-decoration-none`}
+              >
+                Share a deal
+              </Link>
+            </Button>
+          </div>
           <PopularProfiles mobile />
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
@@ -90,7 +94,10 @@ const Deals = ({ message = "" }) => {
                 />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message={message} />
+                  <Asset
+                    src={NoResults}
+                    message="No results found. Adjust the search keyword or share a deal."
+                  />
                 </Container>
               )}
             </>

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../../styles/Post.module.css";
-import homeStyles from '../../styles/HomePage.module.css'
+import homeStyles from "../../styles/HomePage.module.css";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import { Card, Media, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -9,7 +9,6 @@ import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
 const Review = ({ review }) => {
-
   const {
     id = 0,
     owner,
@@ -33,7 +32,7 @@ const Review = ({ review }) => {
 
   const currentUser = useCurrentUser();
   const is_owner = currentUser?.username === review.owner;
-  const history = useHistory()
+  const history = useHistory();
 
   const handleEdit = () => {
     history.push(`/reviews/${id}/edit`);
@@ -42,7 +41,7 @@ const Review = ({ review }) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/reviews/${id}/`);
-      history.goBack();
+      history.push("/reviews");
     } catch (err) {
       console.log(err);
     }
@@ -55,11 +54,7 @@ const Review = ({ review }) => {
         ...prevReviews,
         results: prevReviews.results.map((review) => {
           return review.id === id
-            ? {
-                ...review,
-                review_likes_count: review.review_likes_count + 1,
-                review_like_id: data.id,
-              }
+            ? { ...review, review_likes_count: review.review_likes_count + 1, like_id: data.id }
             : review;
         }),
       }));
@@ -94,7 +89,6 @@ const Review = ({ review }) => {
         <Media className="align-items-center justify-content-between">
           <Link to={`/profiles/${profile_id}`}>
             <Avatar src={profile_image} height={55} />
-            {/* <span className={styles.Username}>{owner}</span> */}
           </Link>
           <div className="align-items-center justify-content-between">
             {title && (
@@ -103,7 +97,12 @@ const Review = ({ review }) => {
           </div>
           <div className="d-flex align-items-center">
             <span className={styles.PostDate}>{updated_at}</span>
-            {is_owner && <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete}/>}
+            {is_owner && (
+              <MoreDropdown
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+              />
+            )}
           </div>
         </Media>
       </Card.Body>
@@ -130,7 +129,10 @@ const Review = ({ review }) => {
             )}
             {stars && (
               <Card.Text className={styles.PostContent}>
-                Stars: {stars}<i className={`fa-solid fa-star small ${homeStyles.YellowText}`}></i>
+                Stars: {stars}
+                <i
+                  className={`fa-solid fa-star small ${homeStyles.YellowText}`}
+                ></i>
               </Card.Text>
             )}
             {genre && (

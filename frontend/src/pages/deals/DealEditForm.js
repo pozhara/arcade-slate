@@ -21,12 +21,7 @@ function DealEditForm() {
     category: "",
     image: "",
   });
-  const {
-    title,
-    content,
-    category,
-    image,
-  } = dealData;
+  const { title, content, category, image } = dealData;
 
   const imageInput = useRef(null);
   const history = useHistory();
@@ -36,20 +31,14 @@ function DealEditForm() {
     const handleMount = async () => {
       try {
         const { data } = await axiosReq.get(`/deals/${id}/`);
-        const {
-          title,
-          content,
-          category,
-          image,
-          is_owner,
-        } = data;
+        const { title, content, category, image, is_owner } = data;
 
         is_owner
           ? setDealData({
               title,
               content,
               category,
-              image
+              image,
             })
           : history.push("/");
       } catch (err) {
@@ -121,12 +110,13 @@ function DealEditForm() {
         <div>
           <label>
             <span>Content:</span>
-            <input
-              type="text"
+            <textarea
+              className="form-control"
               name="content"
               value={content}
               onChange={handleChange}
-            />
+              rows={6}
+            ></textarea>
           </label>
         </div>
         {errors?.content?.map((message, idx) => (
@@ -137,12 +127,7 @@ function DealEditForm() {
         <div>
           <label>
             <span>Category:</span>
-            <select
-              name="category"
-              id="category"
-              value={category}
-              onChange={handleChange}
-            >
+            <select name="category" value={category} onChange={handleChange}>
               <option value=""></option>
               <option value="Percentage discount">Percentage discount</option>
               <option value="Pounds off">Pounds off</option>

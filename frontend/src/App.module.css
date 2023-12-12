@@ -2,12 +2,13 @@
     font-family: 'DM Sans', sans-serif;
     background-color: purple;
     min-height: 100vh;
-    position: relative;
+    display:flex;
+    flex-direction:column;
 }
 
 .Main {
     padding-top: 81px;
-    padding-bottom: 100px;
+    flex:1;
 }
 
 * {

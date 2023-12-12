@@ -5,7 +5,9 @@ import Form from "react-bootstrap/Form";
 import Asset from "../../components/Asset";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
+import btnStyles from "../../styles/Button.module.css";
 import Container from "react-bootstrap/Container";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import Review from "./Review";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -14,12 +16,13 @@ import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
+import { Button } from "react-bootstrap";
 
-const Reviews = ({message=''}) => {
+const Reviews = ({ message = "" }) => {
   const [reviews, setReviews] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-  const currentUser = useCurrentUser()
+  const currentUser = useCurrentUser();
 
   const [query, setQuery] = useState("");
 
@@ -48,7 +51,12 @@ const Reviews = ({message=''}) => {
     <Container>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <PopularProfiles mobile/>
+          <div className='text-center'>
+            <Button className={`${btnStyles.PostBright} mb-2 mt-1`}>
+              <Link to="/reviews/create" className={`text-black text-decoration-none`}>Post a review</Link>
+            </Button>
+          </div>
+          <PopularProfiles mobile />
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
             className={styles.SearchBar}
@@ -82,7 +90,7 @@ const Reviews = ({message=''}) => {
                 />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message={message} />
+                  <Asset src={NoResults} message="No results found. Adjust the search keyword or post a review." />
                 </Container>
               )}
             </>
@@ -93,7 +101,7 @@ const Reviews = ({message=''}) => {
           )}
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <PopularProfiles/>
+          <PopularProfiles />
         </Col>
       </Row>
     </Container>

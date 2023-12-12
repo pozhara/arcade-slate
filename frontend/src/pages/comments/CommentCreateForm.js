@@ -19,7 +19,6 @@ function CommentCreateForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Comment Content Field Form Validation
     if (content === "" || content.trim().length === 0) {
       alert("Form error - Comment cannot be empty");
     } else {

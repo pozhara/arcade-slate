@@ -90,12 +90,13 @@ function DealCreateForm() {
         <div>
           <label>
             <span>Content:</span>
-            <input
-              type="text"
+            <textarea
+              className="form-control"
               name="content"
               value={content}
               onChange={handleChange}
-            />
+              rows={6}
+            ></textarea>
           </label>
         </div>
         {errors?.content?.map((message, idx) => (
@@ -108,7 +109,6 @@ function DealCreateForm() {
             <span>Category:</span>
             <select
               name="category"
-              id="category"
               value={category}
               onChange={handleChange}
             >

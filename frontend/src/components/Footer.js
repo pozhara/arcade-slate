@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import styles from "../styles/NavBar.module.css";
 import footerStyles from "../styles/Footer.module.css";
-import homeStyles from '../styles/HomePage.module.css';
+import homeStyles from "../styles/HomePage.module.css";
 
 const Footer = () => {
   const currentUser = useCurrentUser();
@@ -26,48 +26,81 @@ const Footer = () => {
 
   const loggedInIcons = (
     <>
-      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/feed">
-        <i className="fas fa-stream"></i>Feed
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/feed"
+      >
+        <i className="fas fa-stream"></i>
       </NavLink>
-      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/liked">
-        <i className="fas fa-heart"></i>Liked
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/liked"
+      >
+        <i className="fas fa-heart"></i>
       </NavLink>
       <NavLink className={styles.NavLink} to="/" onClick={handleSignOut}>
-        <i className="fas fa-sign-out-alt"></i>Sign out
+        <i className="fas fa-sign-out-alt"></i>
       </NavLink>
-      <NavLink className={styles.NavLink} to={`/profiles/${currentUser?.profile_id}`}>
-        <Avatar src={currentUser?.profile_image} text="Profile" height={40} />
+      <NavLink
+        className={styles.NavLink}
+        to={`/profiles/${currentUser?.profile_id}`}
+      >
+        <Avatar src={currentUser?.profile_image} height={40} />
       </NavLink>
     </>
   );
   const loggedOutIcons = (
     <>
-      <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/signin">
-        <i className="fas fa-sign-in-alt"></i>Sign in
+      <NavLink
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+        to="/signin"
+      >
+        <i className="fas fa-sign-in-alt"></i>
       </NavLink>
-      <NavLink className={styles.NavLink} to="/signup" activeClassName={styles.Active}>
-        <i className="fas fa-user-plus"></i>Sign up
+      <NavLink
+        to="/signup"
+        className={styles.NavLink}
+        activeClassName={styles.Active}
+      >
+        <i className="fas fa-user-plus"></i>
       </NavLink>
     </>
   );
   return (
-    <section className={`border-bottom text-center mb-0 ${footerStyles.Footer} ${homeStyles.DarkPurpleBackground}`}>
-      <nav>
-        <NavLink className={styles.NavLink} exact activeClassName={styles.Active} to="/">
-          <i className="fas fa-home"></i>Home
-        </NavLink>
-        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/reviews">
-          <i className="fa-solid fa-receipt"></i>Reviews
-        </NavLink>
-        <NavLink className={styles.NavLink} activeClassName={styles.Active} to="/deals">
-          <i className="fa-solid fa-cart-shopping"></i>Deals
-        </NavLink>
-
-        {currentUser ? loggedInIcons : loggedOutIcons}
-      </nav>
-      <hr/>
-      <p className='text-white'>@ arcade slate, 2023</p>
-    </section>
+    <footer className={`${footerStyles.Footer} mt-2`}>
+      <div>
+        <Container className='text-center'>
+          <NavLink
+            exact
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/"
+          >
+            <i className="fas fa-home"></i>
+          </NavLink>
+          <NavLink
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/reviews"
+          >
+            <i className="fa-solid fa-receipt"></i>
+          </NavLink>
+          <NavLink
+            className={styles.NavLink}
+            activeClassName={styles.Active}
+            to="/deals"
+          >
+            <i className="fa-solid fa-cart-shopping"></i>
+          </NavLink>
+          {currentUser ? loggedInIcons : loggedOutIcons}
+          <hr/>
+          <p className="text-white">@ arcade slate, 2023</p>
+        </Container>
+      </div>
+    </footer>
   );
 };
 

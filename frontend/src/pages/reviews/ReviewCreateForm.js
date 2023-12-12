@@ -18,7 +18,7 @@ import { axiosReq } from "../../api/axiosDefaults";
 import { useRedirect } from "../../hooks/useRedirect";
 
 function ReviewCreateForm() {
-  useRedirect('loggedOut')
+  useRedirect("loggedOut");
   const [errors, setErrors] = useState({});
   const [reviewData, setReviewData] = useState({
     title: "",
@@ -89,7 +89,7 @@ function ReviewCreateForm() {
   };
 
   const textFields = (
-    <div className='text-center'>
+    <div className="text-center">
       <div>
         <div>
           <label>
@@ -110,12 +110,13 @@ function ReviewCreateForm() {
         <div>
           <label>
             <span>Content:</span>
-            <input
-              type="text"
+            <textarea
+              className="form-control"
               name="content"
               value={content}
               onChange={handleChange}
-            />
+              rows={6}
+            ></textarea>
           </label>
         </div>
         {errors?.content?.map((message, idx) => (
@@ -126,12 +127,7 @@ function ReviewCreateForm() {
         <div>
           <label>
             <span>Stars:</span>
-            <select
-              name="stars"
-              id="stars"
-              value={stars}
-              onChange={handleChange}
-            >
+            <select name="stars" value={stars} onChange={handleChange}>
               <option value=""></option>
               <option value="1">1</option>
               <option value="1.5">1.5</option>
@@ -153,12 +149,7 @@ function ReviewCreateForm() {
         <div>
           <label>
             <span>Genre:</span>
-            <select
-              name="genre"
-              id="genre"
-              value={genre}
-              onChange={handleChange}
-            >
+            <select name="genre" value={genre} onChange={handleChange}>
               <option value=""></option>
               <option value="Sandbox">Sandbox</option>
               <option value="Real-time strategy">Real-time strategy</option>
@@ -202,7 +193,6 @@ function ReviewCreateForm() {
             <span>Difficulty:</span>
             <select
               name="level_of_difficulty"
-              id="level_of_difficulty"
               value={level_of_difficulty}
               onChange={handleChange}
             >
@@ -225,7 +215,6 @@ function ReviewCreateForm() {
             <span>Suitable age:</span>
             <select
               name="suitable_age"
-              id="suitable_age"
               value={suitable_age}
               onChange={handleChange}
             >
@@ -244,15 +233,17 @@ function ReviewCreateForm() {
           </Alert>
         ))}
         <div>
-          <label>Hours spent:</label>
-          <input
-            type="number"
-            step="1"
-            pattern="\d+"
-            name="hours_spent"
-            value={hours_spent}
-            onChange={handleChange}
-          />
+          <label>
+            <span>Hours spent:</span>
+            <input
+              type="number"
+              step="1"
+              pattern="\d+"
+              name="hours_spent"
+              value={hours_spent}
+              onChange={handleChange}
+            />
+          </label>
         </div>
       </div>
       {errors?.hours_spent?.map((message, idx) => (

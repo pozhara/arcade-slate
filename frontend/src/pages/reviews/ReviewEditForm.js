@@ -149,12 +149,13 @@ function ReviewEditForm() {
         <div>
           <label>
             <span>Content:</span>
-            <input
-              type="text"
+            <textarea
+              className="form-control"
               name="content"
               value={content}
               onChange={handleChange}
-            />
+              rows={6}
+            ></textarea>
           </label>
         </div>
         {errors?.content?.map((message, idx) => (
@@ -165,12 +166,7 @@ function ReviewEditForm() {
         <div>
           <label>
             <span>Stars:</span>
-            <select
-              name="stars"
-              id="stars"
-              value={stars}
-              onChange={handleChange}
-            >
+            <select name="stars" value={stars} onChange={handleChange}>
               <option value=""></option>
               <option value="1">1</option>
               <option value="1.5">1.5</option>
@@ -192,12 +188,7 @@ function ReviewEditForm() {
         <div>
           <label>
             <span>Genre:</span>
-            <select
-              name="genre"
-              id="genre"
-              value={genre}
-              onChange={handleChange}
-            >
+            <select name="genre" value={genre} onChange={handleChange}>
               <option value=""></option>
               <option value="Sandbox">Sandbox</option>
               <option value="Real-time strategy">Real-time strategy</option>
@@ -241,7 +232,6 @@ function ReviewEditForm() {
             <span>Difficulty:</span>
             <select
               name="level_of_difficulty"
-              id="level_of_difficulty"
               value={level_of_difficulty}
               onChange={handleChange}
             >
@@ -264,7 +254,6 @@ function ReviewEditForm() {
             <span>Suitable age:</span>
             <select
               name="suitable_age"
-              id="suitable_age"
               value={suitable_age}
               onChange={handleChange}
             >
@@ -283,15 +272,17 @@ function ReviewEditForm() {
           </Alert>
         ))}
         <div>
-          <label>Hours spent:</label>
-          <input
-            type="number"
-            step="1"
-            pattern="\d+"
-            name="hours_spent"
-            value={hours_spent}
-            onChange={handleChange}
-          />
+          <label>
+            <span>Hours spent:</span>
+            <input
+              type="number"
+              step="1"
+              pattern="\d+"
+              name="hours_spent"
+              value={hours_spent}
+              onChange={handleChange}
+            />
+          </label>
         </div>
         {errors?.hours_spent?.map((message, idx) => (
           <Alert variant="warning" key={idx}>

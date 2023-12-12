@@ -55,7 +55,6 @@
 .PurpleButton{
     background-color:purple;
     color:white;
-    font-size: 18px;
     align-self: center;
     border-radius: 100px;
     border-color: transparent;
@@ -98,4 +97,22 @@
 
 .YellowButton:focus{
     background-color:#ffc8dd;
+}
+
+.PostBright {
+    background-color:#ffc8dd;
+    font-size: 18px;
+    align-self: center;
+    border-radius: 100px;
+    border-color: transparent;
+    padding: 4px 10px;
+    margin-left: 2px;
+    margin-right: 2px;
+    min-width: 75px;
+}
+
+.PostBright:hover {
+    background-color:#fcdc60;
+    border-color: transparent;
+    cursor: pointer;
 }

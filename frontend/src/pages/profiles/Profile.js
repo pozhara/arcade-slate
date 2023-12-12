@@ -24,9 +24,9 @@ const Profile = (props) => {
         <div className={`text-right ${!mobile && 'ml-auto'}`}>
             {!mobile && currentUser && !is_owner && (
                 following_id ? (
-                    <Button className={btnStyles.Button} onClick={()=>handleUnfollow(profile)}>unfollow</Button>
+                    <Button className={`${btnStyles.Bright} ${btnStyles.Button}`} onClick={()=>handleUnfollow(profile)}>unfollow</Button>
                 ) : (
-                    <Button className={btnStyles.PurpleButton} onClick={()=>handleFollow(profile)}>follow</Button>
+                    <Button className={`${btnStyles.PurpleButton} ${btnStyles.Button}`} onClick={()=>handleFollow(profile)}>follow</Button>
                 )
             )}
         </div>

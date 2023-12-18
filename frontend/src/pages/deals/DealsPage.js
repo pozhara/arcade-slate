@@ -50,16 +50,17 @@ const Deals = () => {
     <Container>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <div className="text-center">
-            <Button className={`${btnStyles.PostBright} mb-2 mt-1`}>
+          {currentUser && (
+            <div className="text-center">
               <Link
                 to="/deals/create"
-                className={`text-black text-decoration-none`}
+                className={`text-black text-decoration-none mb-2 mt-1 ${btnStyles.PostBright}`}
               >
                 Share a deal
               </Link>
-            </Button>
-          </div>
+              <hr />
+            </div>
+          )}
           <PopularProfiles mobile />
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form

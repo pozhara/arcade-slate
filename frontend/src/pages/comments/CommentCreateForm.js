@@ -9,7 +9,7 @@ import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 
 function CommentCreateForm(props) {
-  const { review, setReview, setComments, profileImage, profile_id } = props;
+  const { review,setComments, setReview, profileImage, profile_id } = props;
   const [content, setContent] = useState("");
 
   const handleChange = (event) => {
@@ -19,6 +19,7 @@ function CommentCreateForm(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Comment Content Field Form Validation
     if (content === "" || content.trim().length === 0) {
       alert("Form error - Comment cannot be empty");
     } else {
@@ -32,16 +33,6 @@ function CommentCreateForm(props) {
           ...prevComments,
           results: [data, ...prevComments.results],
         }));
-
-        setReview((prevReview) => ({
-          results: [
-            {
-              ...prevReview.results?.[0],
-              review_comments_count: prevReview.results?.[0].review_comments_count + 1,
-            },
-          ],
-        }));
-
         setContent("");
       } catch (err) {
         console.log(err);

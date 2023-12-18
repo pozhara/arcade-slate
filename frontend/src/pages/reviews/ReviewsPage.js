@@ -5,9 +5,7 @@ import Form from "react-bootstrap/Form";
 import Asset from "../../components/Asset";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";
-import btnStyles from "../../styles/Button.module.css";
 import Container from "react-bootstrap/Container";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import Review from "./Review";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -16,13 +14,12 @@ import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
-import { Button } from "react-bootstrap";
 
-const Reviews = ({ message = "" }) => {
+const ReviewsPage = ({message=''}) => {
   const [reviews, setReviews] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-  const currentUser = useCurrentUser();
+  const currentUser = useCurrentUser()
 
   const [query, setQuery] = useState("");
 
@@ -30,6 +27,7 @@ const Reviews = ({ message = "" }) => {
     const fetchReviews = async () => {
       try {
         const { data } = await axiosReq.get(`/reviews/?search=${query}`);
+        console.log(data);
         setReviews(data);
         setHasLoaded(true);
       } catch (err) {
@@ -48,15 +46,10 @@ const Reviews = ({ message = "" }) => {
   }, [query, pathname, currentUser]);
 
   return (
-    <Container>
+    <Container className={""}>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <div className='text-center'>
-            <Button className={`${btnStyles.PostBright} mb-2 mt-1`}>
-              <Link to="/reviews/create" className={`text-black text-decoration-none`}>Post a review</Link>
-            </Button>
-          </div>
-          <PopularProfiles mobile />
+          <PopularProfiles mobile/>
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
             className={styles.SearchBar}
@@ -86,26 +79,33 @@ const Reviews = ({ message = "" }) => {
                   dataLength={reviews.results.length}
                   loader={<Asset spinner />}
                   hasMore={!!reviews.next}
+                  static={false}
                   next={() => fetchMoreData(reviews, setReviews)}
                 />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message="No results found. Adjust the search keyword or post a review." />
+                  <Asset src={NoResults} message='No results' />
                 </Container>
               )}
             </>
           ) : (
-            <Container className={appStyles.Content}>
-              <Asset spinner />
-            </Container>
+            (reviews.results.length) ? 
+            (<Container className={appStyles.Content}>
+              <Asset spinner/>
+            </Container>)
+            :
+            (<Container className={appStyles.Content}>
+              <Asset src={NoResults} message={"No more results"} />
+            </Container>)
+            
           )}
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <PopularProfiles />
+          <PopularProfiles/>
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default Reviews;
+export default ReviewsPage;

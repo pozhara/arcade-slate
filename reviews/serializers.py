@@ -40,6 +40,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             return like.id if like else None
         return None
 
+
     class Meta:
         model = Review
         fields = [

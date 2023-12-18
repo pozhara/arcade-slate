@@ -35,7 +35,7 @@ function ReviewPage() {
       }
     };
     handleMount();
-  }, [id]);
+  }, [id,comments.results.length]);
 
   return (
     <Row className="h-100">

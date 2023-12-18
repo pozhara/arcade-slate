@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../styles/HomePage.module.css";
-import btnStyles from "../styles/Button.module.css";
 
 const HomeHero = () => {
   return (
@@ -9,7 +8,7 @@ const HomeHero = () => {
         <div className={`p-4 p-lg-5 rounded-3 text-center ${styles.HeroImage}`}>
           <div className="m-3 m-lg-4">
             <h1 className="display-5 fw-bold text-white">Arcade Slate</h1>
-            <p className="fs-5 fs-lg-4 text-white">
+            <p className={`text-white ${styles.HomeHero}`}>
               Welcome to our gaming blog, your ultimate destination for all
               things gaming! Here, we dive into the immersive worlds of video
               games, providing insightful reviews and engaging content for both

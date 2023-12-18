@@ -2,32 +2,28 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import Asset from "../../components/Asset";
-import appStyles from "../../App.module.css";
-import styles from "../../styles/PostsPage.module.css";
 import Container from "react-bootstrap/Container";
+import appStyles from "../../App.module.css";
 import { axiosReq } from "../../api/axiosDefaults";
 import Review from "./Review";
-import InfiniteScroll from "react-infinite-scroll-component";
+import Asset from "../../components/Asset";
 import NoResults from "../../assets/no-results.png";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
-import PopularProfiles from "../profiles/PopularProfiles";
 
-const ReviewsFeed = ({message=''}) => {
+const LikedReviews = (message) => {
   const [reviews, setReviews] = useState({ results: [] });
+  const [query, setQuery] = useState("");
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-  const currentUser = useCurrentUser()
-  const profile_id = currentUser?.profile_id || "";
-
-  const [query, setQuery] = useState("");
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { data } = await axiosReq.get(`/liked/?search=${query}`);
+        const { data } = await axiosReq.get(`/reviews/?search=${query}`);
         setReviews(data);
         setHasLoaded(true);
       } catch (err) {
@@ -46,13 +42,13 @@ const ReviewsFeed = ({message=''}) => {
   }, [query, pathname, currentUser]);
 
   return (
-    <Container>
+    <Container fluid>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <PopularProfiles mobile/>
-          <i className={`fas fa-search ${styles.SearchIcon}`} />
+          <p>popular profiles</p>
+          <i className={`fas fa-search ${appStyles.SearchIcon}`} />
           <Form
-            className={styles.SearchBar}
+            className={appStyles.SearchBar}
             onSubmit={(event) => event.preventDefault()}
           >
             <Form.Control
@@ -60,7 +56,7 @@ const ReviewsFeed = ({message=''}) => {
               onChange={(event) => setQuery(event.target.value)}
               type="text"
               className="mr-sm-2"
-              placeholder="Search posts"
+              placeholder="Search reviews"
             />
           </Form>
 
@@ -69,12 +65,7 @@ const ReviewsFeed = ({message=''}) => {
               {reviews.results.length ? (
                 <InfiniteScroll
                   children={reviews.results.map((review) => (
-                    <Review
-                      key={review.id}
-                      review={review}
-                      setReviews={setReviews}
-                      reviewPage
-                    />
+                    <Review key={review.id} review={review} setReviews={setReviews} reviewPage />
                   ))}
                   dataLength={reviews.results.length}
                   loader={<Asset spinner />}
@@ -83,7 +74,7 @@ const ReviewsFeed = ({message=''}) => {
                 />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message="No results found. Adjust the search keyword or like a review." />
+                  <Asset src={NoResults} message={message} />
                 </Container>
               )}
             </>
@@ -94,11 +85,11 @@ const ReviewsFeed = ({message=''}) => {
           )}
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <PopularProfiles/>
+          <p>popular profiles</p>
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default ReviewsFeed;
+export default LikedReviews;

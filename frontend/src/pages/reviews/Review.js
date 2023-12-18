@@ -8,7 +8,7 @@ import Avatar from "../../components/Avatar";
 import { axiosRes } from "../../api/axiosDefaults";
 import { MoreDropdown } from "../../components/MoreDropdown";
 
-const Review = ({ review }) => {
+const Review = ({ review, setReviews }) => {
   const {
     id = 0,
     owner,
@@ -26,12 +26,11 @@ const Review = ({ review }) => {
     level_of_difficulty,
     suitable_age,
     hours_spent,
-    updated_at,
-    setReviews,
+    updated_at
   } = review;
 
   const currentUser = useCurrentUser();
-  const is_owner = currentUser?.username === review.owner;
+  const is_owner = currentUser?.username === owner;
   const history = useHistory();
 
   const handleEdit = () => {
@@ -41,7 +40,7 @@ const Review = ({ review }) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/reviews/${id}/`);
-      history.push("/reviews");
+      history.goBack();
     } catch (err) {
       console.log(err);
     }
@@ -49,37 +48,74 @@ const Review = ({ review }) => {
 
   const handleLike = async () => {
     try {
-      const { data } = await axiosRes.post("/reviewlikes/", { review: id });
+      if (review_like_id) {
+        await axiosRes.post(`/reviews/${id}/unlike`);
+      } else {
+        await axiosRes.post(`/reviews/${id}/like`);
+      }
       setReviews((prevReviews) => ({
         ...prevReviews,
-        results: prevReviews.results.map((review) => {
-          return review.id === id
-            ? { ...review, review_likes_count: review.review_likes_count + 1, like_id: data.id }
-            : review;
-        }),
+        results: prevReviews.results.map((r) =>
+          r.id === id
+            ? {
+                ...r,
+                review_likes_count: review_like_id
+                  ? r.review_likes_count - 1
+                  : r.review_likes_count + 1,
+                review_like_id: review_like_id ? null : 1,
+              }
+            : r
+        ),
       }));
     } catch (err) {
       console.log(err);
+      setReviews((prevReviews) => ({
+        ...prevReviews,
+        results: prevReviews.results.map((r) =>
+          r.id === id
+            ? {
+                ...r,
+                review_likes_count: review_like_id
+                  ? r.review_likes_count + 1
+                  : r.review_likes_count - 1,
+                review_like_id: review_like_id ? 1 : null,
+              }
+            : r
+        ),
+      }));
     }
   };
 
-  const handleUnlike = async () => {
-    try {
-      await axiosRes.delete(`/reviewlikes/${review_like_id}/`);
-      setReviews((prevReviews) => ({
-        ...prevReviews,
-        results: prevReviews.results.map((review) => {
-          return review.id === id
-            ? {
-                ...review,
-                review_likes_count: review.review_likes_count - 1,
-                review_like_id: null,
-              }
-            : review;
-        }),
-      }));
-    } catch (err) {
-      console.log(err);
+  const renderLikeButton = () => {
+    if (is_owner) {
+      return (
+        <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip>You can't like your own post!</Tooltip>}
+        >
+          <i className="far fa-heart" />
+        </OverlayTrigger>
+      );
+    } else if (currentUser) {
+      return (
+        (review_like_id)?
+        <span onClick={handleLike}>
+        <i className={`fas fa-heart ${styles.Heart}`} />
+      </span>
+      :
+        <span onClick={handleLike}>
+          <i className={`far fa-heart ${styles.HeartOutline}`} />
+        </span>
+      );
+    } else {
+      return (
+        <OverlayTrigger
+          placement="top"
+          overlay={<Tooltip>Log in to like posts!</Tooltip>}
+        >
+          <i className="far fa-heart" />
+        </OverlayTrigger>
+      );
     }
   };
 
@@ -97,12 +133,7 @@ const Review = ({ review }) => {
           </div>
           <div className="d-flex align-items-center">
             <span className={styles.PostDate}>{updated_at}</span>
-            {is_owner && (
-              <MoreDropdown
-                handleEdit={handleEdit}
-                handleDelete={handleDelete}
-              />
-            )}
+            {is_owner && <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />}
           </div>
         </Media>
       </Card.Body>
@@ -112,11 +143,7 @@ const Review = ({ review }) => {
           {image && (
             <div className={styles.ImageContainer}>
               <Link to={`/reviews/${id}`}>
-                <Card.Img
-                  src={image}
-                  alt={title}
-                  className={styles.PostImage}
-                />
+                <Card.Img src={image} alt={title} className={styles.PostImage} />
               </Link>
             </div>
           )}
@@ -130,15 +157,11 @@ const Review = ({ review }) => {
             {stars && (
               <Card.Text className={styles.PostContent}>
                 Stars: {stars}
-                <i
-                  className={`fa-solid fa-star small ${homeStyles.YellowText}`}
-                ></i>
+                <i className={`fa-solid fa-star small ${homeStyles.YellowText}`}></i>
               </Card.Text>
             )}
             {genre && (
-              <Card.Text className={styles.PostContent}>
-                Genre: {genre}
-              </Card.Text>
+              <Card.Text className={styles.PostContent}>Genre: {genre}</Card.Text>
             )}
             {developed_by && (
               <Card.Text className={styles.PostContent}>
@@ -164,29 +187,7 @@ const Review = ({ review }) => {
         </div>
         <div>
           <div>
-            {is_owner ? (
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>You can't like your own post!</Tooltip>}
-              >
-                <i className="far fa-heart" />
-              </OverlayTrigger>
-            ) : review_like_id ? (
-              <span onClick={handleUnlike}>
-                <i className={`fas fa-heart ${styles.Heart}`} />
-              </span>
-            ) : currentUser ? (
-              <span onClick={handleLike}>
-                <i className={`far fa-heart ${styles.HeartOutline}`} />
-              </span>
-            ) : (
-              <OverlayTrigger
-                placement="top"
-                overlay={<Tooltip>Log in to like posts!</Tooltip>}
-              >
-                <i className="far fa-heart" />
-              </OverlayTrigger>
-            )}
+            {renderLikeButton()}
             <span className={styles.LikeCount}>{review_likes_count}</span>
           </div>
 

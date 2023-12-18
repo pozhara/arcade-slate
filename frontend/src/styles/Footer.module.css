@@ -2,3 +2,9 @@
     height:100px;
     background-color: rgb(111, 8, 111);
 }
+
+@media (max-width:360px){
+    .Footer {
+        height:150px;
+    }
+}

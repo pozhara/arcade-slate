@@ -15,7 +15,6 @@ import { fetchMoreData } from "../../utils/utils";
 import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
-import { Button } from "react-bootstrap";
 
 const Deals = () => {
   const [deals, setDeals] = useState({ results: [] });

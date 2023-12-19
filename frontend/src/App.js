@@ -22,6 +22,7 @@ import DealCreateForm from "./pages/deals/DealCreateForm";
 import DealEditForm from "./pages/deals/DealEditForm";
 import DealPage from "./pages/deals/DealPage";
 import Deals from "./pages/deals/DealsPage";
+import NotFound from "./components/NotFound";
 
 function App() {
   const currentUser = useCurrentUser();
@@ -49,7 +50,7 @@ function App() {
           <Route exact path='/deals' render={() => <Deals/>}/>
           <Route exact path='/deals/:id' render={() =>  <DealPage/>}/>
           <Route exact path="/deals/:id/edit" render={() => <DealEditForm/>}/>
-          <Route render={() => <p className='text-white'>Page not found!</p>} />
+          <Route render={() => <p className='text-white'><NotFound/></p>} />
         </Switch>
       </Container>
       <Footer />

@@ -1,6 +1,6 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import NavLink from "react-router-dom";
+import Container from "react-bootstrap/Container";
 import Avatar from "./Avatar";
 import {
   useCurrentUser,
@@ -9,7 +9,6 @@ import {
 import axios from "axios";
 import styles from "../styles/NavBar.module.css";
 import footerStyles from "../styles/Footer.module.css";
-import homeStyles from "../styles/HomePage.module.css";
 
 const Footer = () => {
   const currentUser = useCurrentUser();

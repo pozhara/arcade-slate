@@ -12,6 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
+import PopularProfiles from "../profiles/PopularProfiles";
 
 const LikedReviews = (message) => {
   const [reviews, setReviews] = useState({ results: [] });
@@ -45,7 +46,7 @@ const LikedReviews = (message) => {
     <Container fluid>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <p>popular profiles</p>
+          <PopularProfiles mobile/>
           <i className={`fas fa-search ${appStyles.SearchIcon}`} />
           <Form
             className={appStyles.SearchBar}
@@ -85,7 +86,7 @@ const LikedReviews = (message) => {
           )}
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <p>popular profiles</p>
+          <PopularProfiles/>
         </Col>
       </Row>
     </Container>

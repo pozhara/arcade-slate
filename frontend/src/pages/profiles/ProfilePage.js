@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Image } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Asset from "../../components/Asset";

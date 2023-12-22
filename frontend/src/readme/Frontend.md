@@ -120,57 +120,123 @@ The Arcade Slate database was created using six models. There are two different 
 
 **Update username and password**: As a logged in user I can update my username and change my password so that I can change my displayed name and keep my profile secure
 
+## User stories that were not implemented
+
+**Like deals**: As a user I can like a deal so that I can show my reaction to the post
+
+**Comment under deals**: As a user I can comment under a deal to share my thoughts about the post
+
+Unfortunately, I didn't have enought time to implement these two user stories and features in frontend so they were left for future iterations.
+
 # Features
 
 ## Existing features
 
 ### Sign-up page
 
+![Sign-up page](./images/arcade-signup.jpg)
+
 ### Sign-in page
+
+![Sign-in page](./images/arcade-signin.jpg)
 
 ### Sign-out
 
+After signing out user is redirected to home page.
+
 ### Home page
+
+![Home page 1](./images/arcade-home1.jpg)
+
+![Home page 2](./images/arcade-home2.jpg)
 
 ### Reviews page
 
+![Reviews page 1](./images/arcade-reviewspage1.jpg)
+
+![Reviews page 2](./images/arcade-reviewspage2.jpg)
+
 ### Liked page
+
+![Liked page](./images/arcade-liked.jpg)
 
 ### Feed
 
+![Feed](./images/arcade-feed.jpg)
+
 ### Review page
+
+![Review page 1](./images/arcade-review1.jpg)
+
+![Review page 2](./images/arcade-review2.jpg)
 
 ### Deals page
 
+![Deals page](./images/arcade-dealspage.jpg)
+
 ### Deal page
+
+![Deal page 1](./images/arcade-deals.jpg)
+
+![Deal page 2](./images/arcade-deals1.jpg)
 
 ### Create/Edit review
 
+![Create/Edit review](./images/arcade-createreview.jpg)
+
 ### Create/Edit deal
+
+![Create/Edit deal](./images/arcade-createdeal.jpg)
 
 ### Profile page
 
+![Profile](./images/arcade-profile.jpg)
+
 ### Edit profile
+
+![Edit profile](./images/arcade-editprofile.jpg)
 
 ### Change password
 
+![Change password](./images/arcade-password.jpg)
+
 ## Future features
+
+1. As I didn't have enought time to implement liking and commenting functionality for deals in frontend, it had to be left for future.
+
+2. Success messages for signing in/up/out, creating/editing/deleting posts.
 
 ## Components
 
-### Asset
-
 ### Avatar
+
+![Avatar](./images/arcade-avatar.jpg)
+
+### Comment
+
+![Comment](./images/arcade-comment.jpg)
 
 ### Footer
 
+![Footer](./images/arcade-footer.jpg)
+
 ### HomeAbout
+
+![Home About](./images/arcade-homeabout.jpg)
 
 ### HomeHero
 
+![Home Hero](./images/arcade-homehero.jpg)
+
 ### MoreDropdown
 
+![MoreDropdown for profile](./images/arcade-moredropdown1.jpg)
+
+![MoreDropdown for post/comment](./images/arcade-moredropdown2.jpg)
+
 ### NavBar
+
+![Navbar](./images/arcade-navbar.jpg)
 
 # Testing
 
@@ -181,8 +247,6 @@ The Arcade Slate database was created using six models. There are two different 
 #### Sign-up page
 
 #### Sign-in page
-
-#### Sign-out
 
 #### Home page
 

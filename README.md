@@ -4,9 +4,7 @@ Arcade Slate is an online application that allows users to post reviews and deal
 
 The project has been split into two parts - the frontend built with React, and the backend powered by the Django REST Framework.
 
-Link to the live site -
-
-Link to the live API -
+Link to the live site - [Arcade Slate](https://arcade-slate-api-aec03c6d03e8.herokuapp.com)
 
 # User Stories
 
@@ -14,9 +12,9 @@ I decided not to write user stories for backend as all of them are covered in fr
 
 Link to frontend's user stories in readme -
 
-Link to project's issues -
+Link to project's issues - [Arcade Slate's issues](https://github.com/pozhara/arcade-slate/issues)
 
-Link to project board -
+Link to project board - [Arcade Slate project board](https://github.com/users/pozhara/projects/13)
 
 # Database Schemas
 

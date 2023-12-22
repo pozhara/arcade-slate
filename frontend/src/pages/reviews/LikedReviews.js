@@ -47,9 +47,9 @@ const LikedReviews = (message) => {
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
           <PopularProfiles mobile/>
-          <i className={`fas fa-search ${appStyles.SearchIcon}`} />
+          <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
-            className={appStyles.SearchBar}
+            className={styles.SearchBar}
             onSubmit={(event) => event.preventDefault()}
           >
             <Form.Control
@@ -57,7 +57,7 @@ const LikedReviews = (message) => {
               onChange={(event) => setQuery(event.target.value)}
               type="text"
               className="mr-sm-2"
-              placeholder="Search reviews"
+              placeholder="Search posts"
             />
           </Form>
 

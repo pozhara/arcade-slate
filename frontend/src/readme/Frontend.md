@@ -4,9 +4,7 @@ Arcade Slate is an online application that allows users to post reviews and deal
 
 The project has been split into two parts - the frontend built with React, and the backend powered by the Django REST Framework.
 
-Link to the live site -
-
-Link to the live API -
+Link to the live site - [Arcade Slate](https://arcade-slate-api-aec03c6d03e8.herokuapp.com)
 
 # Project
 
@@ -34,17 +32,13 @@ Target audience is gamers. They look for more games to play and want to read the
 
 All user stories were added to the to-do section. When working on them, they were moved to in progress section, and on their completion, to done section.
 
-You can view the project board !!!!here.
+You can view the project board [here](https://github.com/users/pozhara/projects/13/views/1).
 
 ### Database Schema
 
 ![Database schema](./images/database1.png)
 
 The Arcade Slate database was created using six models. There are two different post types - reviews and deals. Users can also interact with reviews and other users using likes,comments and follow. The profile model allows for further profile customisation.
-
-# User Experience UX
-
-There were no wireframes for this project as the layout and styles were taken from Code Institute's Moments walkthrough.
 
 # User Stories
 
@@ -96,6 +90,124 @@ There were no wireframes for this project as the layout and styles were taken fr
 
 ## Epic 5 - Comments
 
+**Create a comment**: As a logged in user I can comment under reviews so that I can share my thoughts on it
+
+**Comment date**: As a user I can see how long ago a comment was posted so that I know how old a comment is
+
+**View comments**: As a user I can read comments on reviews so that I can read what other users think about it
+
+**Delete comments**: As an owner of a comment I can delete it so that I am able to control what I posted
+
+**Edit comment**: As an owner of a comment I can edit it so that I can update it's content in case I made a typo or changed my thoughts
+
 ## Epic 6 - Likes
 
+**Like/Unlike a review**: As a logged in user I can like a review so that the owner knows I liked their thoughts and I can unlike it in case I changed my mind
+
 ## Epic 7 - Profiles
+
+**Most followed profiles**: As a user I can see a list of the most followed profiles so that I can see which profiles are popular
+
+**User stats**: As a user I can view statistics of a specific user so that I can learn more about their activity
+
+**Profile page**: As a user I can view other users' profiles so that I can see their reviews and learn more about them
+
+**View all reviews by a specific user**: As a user I can view all the reviews so that I can catch up on their latest reviews, or decide if I want to follow them
+
+**Follow/Unfollow a user**: As a logged in user I can follow and unfollow other users so that I can view or remove their reviews from my feed page
+
+**Edit profile**: As a logged in user I can edit my profile so that I can change my profile picture and bio
+
+**Update username and password**: As a logged in user I can update my username and change my password so that I can change my displayed name and keep my profile secure
+
+# Features
+
+## Existing features
+
+### Sign-up page
+
+### Sign-in page
+
+### Sign-out
+
+### Home page
+
+### Reviews page
+
+### Liked page
+
+### Feed
+
+### Review page
+
+### Deals page
+
+### Deal page
+
+### Create/Edit review
+
+### Create/Edit deal
+
+### Profile page
+
+### Edit profile
+
+### Change password
+
+## Future features
+
+## Components
+
+### Asset
+
+### Avatar
+
+### Footer
+
+### HomeAbout
+
+### HomeHero
+
+### MoreDropdown
+
+### NavBar
+
+# Testing
+
+## Validator tests
+
+### W3C HTML
+
+#### Sign-up page
+
+#### Sign-in page
+
+#### Sign-out
+
+#### Home page
+
+#### Reviews page
+
+#### Liked page
+
+#### Feed
+
+#### Review page
+
+#### Deals page
+
+#### Deal page
+
+#### Create/Edit review
+
+#### Create/Edit deal
+
+#### Profile page
+
+#### Edit profile
+
+#### Change password
+
+### W3C CSS
+
+### ESLint JavaScript

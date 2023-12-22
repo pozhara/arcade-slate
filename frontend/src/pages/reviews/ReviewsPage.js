@@ -14,8 +14,9 @@ import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
+import btnStyles from '../../styles/Button.module.css';
 
-const ReviewsPage = ({message=''}) => {
+const ReviewsPage = () => {
   const [reviews, setReviews] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
@@ -49,6 +50,17 @@ const ReviewsPage = ({message=''}) => {
     <Container className={""}>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
+        {currentUser && (
+            <div className="text-center">
+              <Link
+                to="/reviews/create"
+                className={`text-black text-decoration-none mb-2 mt-1 ${btnStyles.PostBright}`}
+              >
+                Post a review
+              </Link>
+              <hr />
+            </div>
+          )}
           <PopularProfiles mobile/>
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
@@ -79,7 +91,6 @@ const ReviewsPage = ({message=''}) => {
                   dataLength={reviews.results.length}
                   loader={<Asset spinner />}
                   hasMore={!!reviews.next}
-                  static={false}
                   next={() => fetchMoreData(reviews, setReviews)}
                 />
               ) : (

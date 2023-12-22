@@ -4,14 +4,11 @@ import Row from "react-bootstrap/Row";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { axiosReq } from "../../api/axiosDefaults";
 import Deal from "./Deal";
-import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
 
 function DealPage() {
   const { id } = useParams();
   const [deal, setDeal] = useState({});
-  const currentUser = useCurrentUser();
-  const profile_image = currentUser?.profile_image;
 
   useEffect(() => {
     const handleMount = async () => {

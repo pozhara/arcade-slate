@@ -9,7 +9,6 @@ import ReviewCreateForm from "./pages/reviews/ReviewCreateForm";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/Footer";
 import ReviewPage from "./pages/reviews/ReviewPage";
-import { useCurrentUser } from "./contexts/CurrentUserContext";
 import ReviewsPage from "./pages/reviews/ReviewsPage";
 import LikedReviews from "./pages/reviews/LikedReviews";
 import ReviewEditForm from "./pages/reviews/ReviewEditForm";
@@ -25,8 +24,6 @@ import Deals from "./pages/deals/DealsPage";
 import NotFound from "./components/NotFound";
 
 function App() {
-  const currentUser = useCurrentUser();
-  const profile_id = currentUser?.profile_id || "";
   return (
     <div className={styles.App}>
       <NavBar />
@@ -35,11 +32,11 @@ function App() {
           <Route exact path="/" render={() => <HomePage />} />
           <Route exact path="/signin" render={() => <SignInForm />} />
           <Route exact path="/signup" render={() => <SignUpForm />} />
-          <Route exact path="/feed" render={() =><ReviewsFeed/>}/>
           <Route exact path="/reviews/create" render={() => <ReviewCreateForm />} />
           <Route exact path="/reviews" render={() => <ReviewsPage/>} />
           <Route exact path="/reviews/all" render={() => <ReviewsPage/>} />
           <Route exact path="/liked" render={() => <LikedReviews/>} />
+          <Route exact path="/feed" render={() =><ReviewsFeed/>}/>
           <Route exact path="/reviews/:id" render={() => <ReviewPage/>} />
           <Route exact path="/reviews/:id/edit" render={() => <ReviewEditForm/>} />
           <Route exact path='/profiles/:id' render={() => <ProfilePage/>}/>

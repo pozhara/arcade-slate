@@ -15,11 +15,11 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
 
-const ReviewsFeed = ({message=''}) => {
+const ReviewsFeed = ({ message = "" }) => {
   const [reviews, setReviews] = useState({ results: [] });
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
-  const currentUser = useCurrentUser()
+  const currentUser = useCurrentUser();
   const profile_id = currentUser?.profile_id || "";
 
   const [query, setQuery] = useState("");
@@ -27,7 +27,9 @@ const ReviewsFeed = ({message=''}) => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { data } = await axiosReq.get(`/reviews/?filter=owner__followed__owner__profile=${profile_id}&search=${query}`);
+        const { data } = await axiosReq.get(
+          `/reviews/?owner__followed__owner__profile=${profile_id}&search=${query}`
+        );
         setReviews(data);
         setHasLoaded(true);
       } catch (err) {
@@ -43,13 +45,13 @@ const ReviewsFeed = ({message=''}) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [query, pathname, currentUser]);
+  }, [query, pathname, currentUser, profile_id]);
 
   return (
     <Container>
       <Row className="h-100">
         <Col className="py-2 p-0 p-lg-2" lg={8}>
-          <PopularProfiles mobile/>
+          <PopularProfiles mobile />
           <i className={`fas fa-search ${styles.SearchIcon}`} />
           <Form
             className={styles.SearchBar}
@@ -83,18 +85,22 @@ const ReviewsFeed = ({message=''}) => {
                 />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message={message} />
+                  <Asset src={NoResults} message="No results" />
                 </Container>
               )}
             </>
-          ) : (
+          ) : reviews.results.length ? (
             <Container className={appStyles.Content}>
               <Asset spinner />
+            </Container>
+          ) : (
+            <Container className={appStyles.Content}>
+              <Asset src={NoResults} message={"No more results"} />
             </Container>
           )}
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">
-          <PopularProfiles/>
+          <PopularProfiles />
         </Col>
       </Row>
     </Container>

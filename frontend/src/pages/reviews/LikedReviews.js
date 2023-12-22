@@ -13,6 +13,7 @@ import { fetchMoreData } from "../../utils/utils";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import PopularProfiles from "../profiles/PopularProfiles";
+import styles from '../../styles/PostsPage.module.css';
 
 const LikedReviews = (message) => {
   const [reviews, setReviews] = useState({ results: [] });
@@ -20,11 +21,12 @@ const LikedReviews = (message) => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const { pathname } = useLocation();
   const currentUser = useCurrentUser();
+  const profile_id = currentUser?.profile_id || "";
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const { data } = await axiosReq.get(`/reviews/?search=${query}`);
+        const { data } = await axiosReq.get(`/reviews/?review_likes__owner__profile=${profile_id}&ordering=-likes__created_at&search=${query}`);
         setReviews(data);
         setHasLoaded(true);
       } catch (err) {
@@ -40,7 +42,7 @@ const LikedReviews = (message) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [query, pathname, currentUser]);
+  }, [query, pathname, currentUser, profile_id]);
 
   return (
     <Container fluid>
@@ -66,7 +68,12 @@ const LikedReviews = (message) => {
               {reviews.results.length ? (
                 <InfiniteScroll
                   children={reviews.results.map((review) => (
-                    <Review key={review.id} review={review} setReviews={setReviews} reviewPage />
+                    <Review
+                      key={review.id}
+                      review={review}
+                      setReviews={setReviews}
+                      reviewPage
+                    />
                   ))}
                   dataLength={reviews.results.length}
                   loader={<Asset spinner />}
@@ -75,14 +82,20 @@ const LikedReviews = (message) => {
                 />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset src={NoResults} message={message} />
+                  <Asset src={NoResults} message='No results' />
                 </Container>
               )}
             </>
           ) : (
-            <Container className={appStyles.Content}>
-              <Asset spinner />
-            </Container>
+            (reviews.results.length) ? 
+            (<Container className={appStyles.Content}>
+              <Asset spinner/>
+            </Container>)
+            :
+            (<Container className={appStyles.Content}>
+              <Asset src={NoResults} message={"No more results"} />
+            </Container>)
+            
           )}
         </Col>
         <Col md={4} className="d-none d-lg-block p-0 p-lg-2">

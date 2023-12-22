@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Asset from "../../components/Asset";
 import appStyles from "../../App.module.css";
 import styles from "../../styles/PostsPage.module.css";

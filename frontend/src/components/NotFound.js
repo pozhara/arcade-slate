@@ -1,5 +1,4 @@
 import React from 'react'
-import Asset from './Asset'
 
 const NotFound = () => {
   return (

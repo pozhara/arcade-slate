@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "../../styles/Post.module.css";
-import homeStyles from '../../styles/HomePage.module.css'
 import { useCurrentUser } from "../../contexts/CurrentUserContext";
 import Card from "react-bootstrap/Card";
 import Media from "react-bootstrap/Media";

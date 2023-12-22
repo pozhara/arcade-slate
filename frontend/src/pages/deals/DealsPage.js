@@ -79,31 +79,32 @@ const Deals = () => {
             <>
               {deals.results.length ? (
                 <InfiniteScroll
-                  children={deals.results.map((deal) => (
-                    <Deal
-                      key={deal.id}
-                      deal={deal}
-                      setDeals={setDeals}
-                      dealPage
-                    />
-                  ))}
-                  dataLength={deals.results.length}
-                  loader={<Asset spinner />}
-                  hasMore={!!deals.next}
-                  next={() => fetchMoreData(deals, setDeals)}
-                />
+                children={deals.results.map((deal) => (
+                  <Deal
+                    key={deal.id}
+                    deal={deal}
+                    setDeals={setDeals}
+                    dealPage
+                  />
+                ))}
+                dataLength={deals.results.length}
+                loader={<Asset spinner />}
+                hasMore={!!deals.next}
+                next={() => fetchMoreData(deals, setDeals)}
+              />
               ) : (
                 <Container className={appStyles.Content}>
-                  <Asset
-                    src={NoResults}
-                    message="No results found. Adjust the search keyword or share a deal."
-                  />
+                  <Asset src={NoResults} message="No results" />
                 </Container>
               )}
             </>
-          ) : (
+          ) : deals.results.length ? (
             <Container className={appStyles.Content}>
               <Asset spinner />
+            </Container>
+          ) : (
+            <Container className={appStyles.Content}>
+              <Asset src={NoResults} message={"No more results"} />
             </Container>
           )}
         </Col>

@@ -104,47 +104,47 @@ function ProfilePage() {
     </>
   );
 
-  const MainProfilePosts = (
-    <>
-      <hr />
-      <p className="text-center">{profile?.owner}'s reviews</p>
-      <hr />
-      {reviews.results.length ? (
-        <InfiniteScroll
-          children={reviews.results.map((review) => (
-            <Review
-              key={review.id}
-              review={review}
-              setReviews={setReviews}
-              reviewPage
-            />
-          ))}
-          dataLength={reviews.results.length}
-          loader={<Asset spinner />}
-          hasMore={!!reviews.next}
-          next={() => fetchMoreData(reviews, setReviews)}
-        />
-      ) : (
-        <Asset
-          src={NoResults}
-          message={`No results found, ${profile?.owner} hasn't posted yet.`}
-        />
-      )}
-    </>
-  );
-
   return (
     <Row>
       <Col className="py-2 p-0 p-lg-2" lg={8}>
         <PopularProfiles mobile />
         <Container className={appStyles.Content}>
+          { MainProfile }
           {hasLoaded ? (
             <>
-              {MainProfile}
-              {MainProfilePosts}
+              <hr />
+              <p className="text-center">{profile?.owner}'s reviews</p>
+              <hr />
+              {reviews.results.length ? (
+                <InfiniteScroll
+                  children={reviews.results.map((review) => (
+                    <Review
+                      key={review.id}
+                      review={review}
+                      setReviews={setReviews}
+                      reviewPage
+                    />
+                  ))}
+                  dataLength={reviews.results.length}
+                  loader={<Asset spinner />}
+                  hasMore={!!reviews.next}
+                  next={() => fetchMoreData(reviews, setReviews)}
+                />
+              ) : (
+                <Asset
+                  src={NoResults}
+                  message={`No results found, ${profile?.owner} hasn't posted yet.`}
+                />
+              )}
             </>
+          ) : reviews.results.length ? (
+            <Container className={appStyles.Content}>
+              <Asset spinner />
+            </Container>
           ) : (
-            <Asset spinner />
+            <Container className={appStyles.Content}>
+              <Asset src={NoResults} message={"No more results"} />
+            </Container>
           )}
         </Container>
       </Col>

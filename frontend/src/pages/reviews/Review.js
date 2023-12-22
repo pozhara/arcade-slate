@@ -29,7 +29,8 @@ const Review = ({ review, setReviews }) => {
     level_of_difficulty,
     suitable_age,
     hours_spent,
-    updated_at
+    updated_at,
+    reviewPage,
   } = review;
 
   const currentUser = useCurrentUser();
@@ -43,7 +44,7 @@ const Review = ({ review, setReviews }) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/reviews/${id}/`);
-      history.goBack();
+      history.push('/');
     } catch (err) {
       console.log(err);
     }
@@ -100,12 +101,11 @@ const Review = ({ review, setReviews }) => {
         </OverlayTrigger>
       );
     } else if (currentUser) {
-      return (
-        (review_like_id)?
+      return review_like_id ? (
         <span onClick={handleLike}>
-        <i className={`fas fa-heart ${styles.Heart}`} />
-      </span>
-      :
+          <i className={`fas fa-heart ${styles.Heart}`} />
+        </span>
+      ) : (
         <span onClick={handleLike}>
           <i className={`far fa-heart ${styles.HeartOutline}`} />
         </span>
@@ -136,7 +136,7 @@ const Review = ({ review, setReviews }) => {
           </div>
           <div className="d-flex align-items-center">
             <span className={styles.PostDate}>{updated_at}</span>
-            {is_owner && <MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />}
+            {is_owner && (<MoreDropdown handleEdit={handleEdit} handleDelete={handleDelete} />)}
           </div>
         </Media>
       </Card.Body>
@@ -146,7 +146,11 @@ const Review = ({ review, setReviews }) => {
           {image && (
             <div className={styles.ImageContainer}>
               <Link to={`/reviews/${id}`}>
-                <Card.Img src={image} alt={title} className={styles.PostImage} />
+                <Card.Img
+                  src={image}
+                  alt={title}
+                  className={styles.PostImage}
+                />
               </Link>
             </div>
           )}
@@ -160,11 +164,15 @@ const Review = ({ review, setReviews }) => {
             {stars && (
               <Card.Text className={styles.PostContent}>
                 Stars: {stars}
-                <i className={`fa-solid fa-star small ${homeStyles.YellowText}`}></i>
+                <i
+                  className={`fa-solid fa-star small ${homeStyles.YellowText}`}
+                ></i>
               </Card.Text>
             )}
             {genre && (
-              <Card.Text className={styles.PostContent}>Genre: {genre}</Card.Text>
+              <Card.Text className={styles.PostContent}>
+                Genre: {genre}
+              </Card.Text>
             )}
             {developed_by && (
               <Card.Text className={styles.PostContent}>

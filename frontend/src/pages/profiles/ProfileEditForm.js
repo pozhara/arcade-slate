@@ -130,14 +130,15 @@ const ProfileEditForm = () => {
                 </Alert>
               ))}
               <div>
-                <Form.Label
-                  className={`${btnStyles.Button} ${btnStyles.Blue} btn my-auto`}
+              <Form.Label
+                  className={`${btnStyles.Button} ${btnStyles.Bright} btn`}
                   htmlFor="image-upload"
                 >
                   Change the image
                 </Form.Label>
               </div>
               <Form.File
+                className={appStyles.None}
                 id="image-upload"
                 ref={imageFile}
                 accept="image/*"

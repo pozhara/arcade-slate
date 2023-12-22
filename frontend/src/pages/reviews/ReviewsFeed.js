@@ -75,7 +75,6 @@ const ReviewsFeed = ({ message = "" }) => {
                       key={review.id}
                       review={review}
                       setReviews={setReviews}
-                      reviewPage
                     />
                   ))}
                   dataLength={reviews.results.length}

@@ -65,3 +65,7 @@ figure {
     text-align: center;
     display: inline-block;
 }
+
+.None{
+    display: none;
+}

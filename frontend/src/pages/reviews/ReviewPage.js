@@ -41,11 +41,7 @@ function ReviewPage() {
     <Row className="h-100">
       <Col className="py-2 p-0 p-lg-2 " lg={8}>
         <PopularProfiles mobile/>
-        {review && (
-          <>
-            <Review review={review} setReviews={setReview} reviewPage />
-          </>
-        )}
+        <Review review={review} setReviews={setReview} reviewPage />
         <Container className={appStyles.Content}>
           {currentUser ? (
             <CommentCreateForm

@@ -32,7 +32,7 @@ const Deal = ({ deal }) => {
   const handleDelete = async () => {
     try {
       await axiosRes.delete(`/deals/${id}/`);
-      history.push('/deals');
+      history.push('/');
     } catch (err) {
       console.log(err);
     }

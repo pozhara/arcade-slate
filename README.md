@@ -10,8 +10,6 @@ Link to the live site - [Arcade Slate](https://arcade-slate-api-aec03c6d03e8.her
 
 I decided not to write user stories for backend as all of them are covered in frontend's user stories.
 
-Link to frontend's user stories in readme -
-
 Link to project's issues - [Arcade Slate's issues](https://github.com/pozhara/arcade-slate/issues)
 
 Link to project board - [Arcade Slate project board](https://github.com/users/pozhara/projects/13)

@@ -29,11 +29,10 @@ const ReviewsPage = () => {
     const fetchReviews = async () => {
       try {
         const { data } = await axiosReq.get(`/reviews/?search=${query}`);
-        console.log(data);
         setReviews(data);
         setHasLoaded(true);
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     };
 

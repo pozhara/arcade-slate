@@ -43,7 +43,7 @@ function DealEditForm() {
             })
           : history.push("/");
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -82,7 +82,7 @@ function DealEditForm() {
       await axiosReq.put(`/deals/${id}/`, formData);
       history.push(`/deals/${id}`);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

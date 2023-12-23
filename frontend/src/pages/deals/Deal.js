@@ -34,7 +34,7 @@ const Deal = ({ deal }) => {
       await axiosRes.delete(`/deals/${id}/`);
       history.push('/');
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

@@ -18,7 +18,7 @@ function DealPage() {
         ]);
         setDeal(deal);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     handleMount();

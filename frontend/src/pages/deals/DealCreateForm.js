@@ -62,7 +62,7 @@ function DealCreateForm() {
       const { data } = await axiosReq.post("/deals/", formData);
       history.push(`/deals/${data.id}`);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       if (err.response?.status !== 401) {
         setErrors(err.response?.data);
       }

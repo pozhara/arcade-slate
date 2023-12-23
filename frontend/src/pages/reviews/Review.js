@@ -46,7 +46,7 @@ const Review = ({ review, setReviews }) => {
       await axiosRes.delete(`/reviews/${id}/`);
       history.push('/');
     } catch (err) {
-      console.log(err);
+      //console.log(err);
     }
   };
 
@@ -72,7 +72,7 @@ const Review = ({ review, setReviews }) => {
         ),
       }));
     } catch (err) {
-      console.log(err);
+      //console.log(err);
       setReviews((prevReviews) => ({
         ...prevReviews,
         results: prevReviews.results.map((r) =>
